@@ -5,18 +5,21 @@
 
 // I AM NOT DONE
 
-#[contract]
+#[starknet::contract]
 mod JoesContract {
-
+    #[storage]
+    struct Storage {
+        stored_data: u128
+    }
     fn get_owner() -> felt252 {
         'Joe'
     }
 
 }
 
-#[abi]
-trait IJoesContract {
-    fn get_owner() -> felt252;
+#[starknet::interface]
+trait IJoesContract<TContractState> {
+    fn get_owner(self: @TContractState) -> felt252;
 }
 
 #[cfg(test)]
